@@ -1,17 +1,17 @@
 const express = require("express");
-const db = require("../backend/Database/DatabaseConnection"); // Connection Handling MongoDB
+const db = require("./Database/DatabaseConnection"); // Connection Handling MongoDB
 const userrouter = require("./Routers/userRouter");
 const app = express();
 const cors = require("cors");
 const {
   errorHandler,
   notFound,
-} = require("../backend/middlewares/errorMiddleware");
+} = require("./middlewares/errorMiddleware");
 const PORT = process.env.PORT || 1783;
 
 app.use(
   cors({
-    origin: ["http://localhost:6463",'http://localhost:6464'],
+    origin: "*",
     credentials: true,
   })
 );
