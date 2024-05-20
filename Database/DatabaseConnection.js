@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 
-const dbURI = "mongodb+srv://bughlani:bughlani@cluster0.9qki3lg.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0/RR_Farming";
+const dbURI = "mongodb+srv://bughlani:bughlani@cluster0.9qki3lg.mongodb.net/farming?retryWrites=true&w=majority&appName=Cluster0";
 // const dbURI = "mongodb://127.0.0.1:27017/farming";
 
 mongoose.connect(dbURI);

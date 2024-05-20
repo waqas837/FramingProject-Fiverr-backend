@@ -1,16 +1,21 @@
 const AsyncHandler = require("express-async-handler");
 const CategoryModel = require("../../Models/AdminModel/CategoryModel");
-const mongoose = require('mongoose');
 
 const postCategory = AsyncHandler(async (req, res) => {
+  console.log("postCategory")
   const { categoryName } = req.body;
   try {
     const existingCategory = await CategoryModel.findOne({ categoryName });
     if (existingCategory) {
+      console.log("Already exists..")
       return res.status(400).json("Category Already Exists");
     }
 
     const categoryImage = req.file.filename;
+    console.log({
+      categoryName,
+      categoryImage
+    })
     await CategoryModel.create({
       categoryName,
       categoryImage
@@ -27,7 +32,7 @@ const postCategory = AsyncHandler(async (req, res) => {
 
 const getCategories = AsyncHandler(async (req, res) => {
   const categories = await CategoryModel.find();
-  console.log("categories",categories);
+  console.log("categories", categories);
   res.status(200).json(categories);
 });
 
@@ -39,7 +44,7 @@ const deleteCategory = AsyncHandler(async (req, res) => {
   try {
     const deletedCategory = await CategoryModel.findOneAndDelete(({ _id: categoryId }));
     if (!deletedCategory) {
-      return res.status(404).json('Category not found' );
+      return res.status(404).json('Category not found');
     }
 
     res.status(200).json('Category deleted successfully');
